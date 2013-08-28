@@ -5,20 +5,22 @@
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/security 
 		http://www.springframework.org/schema/security/spring-security-3.1.xsd">
-
+		
+  	<security:global-method-security secured-annotations="enabled" />
+		
 	<security:http auto-config="true">
-		<security:form-login login-page="/"
-			default-target-url="/" authentication-failure-url="/" />
+		<security:form-login default-target-url="/security/" />
 		<security:intercept-url pattern="/security/**" access="ROLE_USER" />
+		<security:logout logout-url="/logout" />
 	</security:http>
 
 	<security:authentication-manager>
 	
 		<security:authentication-provider>
 			<security:user-service>
-				<security:user name="jimi" password="jimispassword"
+				<security:user name="admin" password="123"
 					authorities="ROLE_USER, ROLE_ADMIN" />
-				<security:user name="bob" password="bobspassword"
+				<security:user name="user" password="123"
 					authorities="ROLE_USER" />
 			</security:user-service>
 		</security:authentication-provider>
