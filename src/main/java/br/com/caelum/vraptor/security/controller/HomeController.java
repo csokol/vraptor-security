@@ -2,6 +2,9 @@ package br.com.caelum.vraptor.security.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Resource;
@@ -16,14 +19,15 @@ public class HomeController {
 	private UserDao dao;
 	@Autowired
 	private Result result;
-
+	
 //	public HomeController(UserDao dao) {
 //		this.dao = dao;
 //	}
 	
 	@Get("/security/")
 	public void index() {
-		result.use(Results.http()).body("welcome logged user!");
+		UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		result.use(Results.http()).body("welcome " + principal.getUsername());
 	}
 	
 	@Secured("ROLE_ADMIN")

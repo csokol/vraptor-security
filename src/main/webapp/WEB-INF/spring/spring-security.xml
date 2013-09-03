@@ -13,19 +13,22 @@
 		<security:intercept-url pattern="/security/**" access="ROLE_USER" />
 		<security:logout logout-url="/logout" />
 	</security:http>
-
-	<security:authentication-manager>
 	
-		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="admin" password="123"
-					authorities="ROLE_USER, ROLE_ADMIN" />
-				<security:user name="user" password="123"
-					authorities="ROLE_USER" />
-			</security:user-service>
+	<bean class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" id="passwordEncoder" />
+
+	<security:authentication-manager >
+		<security:authentication-provider user-service-ref="meuService">
+			<security:password-encoder hash="sha">
+				<security:salt-source system-wide="salt" />
+			</security:password-encoder>
 		</security:authentication-provider>
-		
 	</security:authentication-manager>
+	
+	<bean id="meuService" 
+		class="br.com.caelum.vraptor.security.auth.UserDaoService" 
+		autowire="constructor" />
+		
+	<bean class="br.com.caelum.vraptor.security.dao.UserDao" id="userDao" />
 
 
 </beans>

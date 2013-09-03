@@ -1,3 +1,6 @@
 
 continuar aqui
-http://static.springsource.org/spring-security/site/docs/3.1.x/reference/ns-config.html
+http://static.springsource.org/spring-security/site/docs/3.1.x/reference/technical-overview.html
+
+ver talvez aqui
+http://static.springsource.org/spring-security/site/docs/3.1.x/reference/appendix-schema.html#db_schema_users_authorities
