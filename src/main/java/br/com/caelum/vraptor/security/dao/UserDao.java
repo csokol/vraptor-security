@@ -1,7 +1,13 @@
 package br.com.caelum.vraptor.security.dao;
 
+import org.springframework.security.access.annotation.Secured;
+
+import br.com.caelum.vraptor.ioc.Component;
+import br.com.caelum.vraptor.ioc.PrototypeScoped;
 import br.com.caelum.vraptor.security.model.MeuUser;
 
+@PrototypeScoped
+@Component
 public class UserDao implements UserRepository {
 
 	@Override
@@ -12,6 +18,12 @@ public class UserDao implements UserRepository {
 		if ("user".equals(login)) {
 			return MeuUser.USER;
 		}
+		return null;
+	}
+	
+	
+	@Secured("ROLE_ADMIN")
+	public MeuUser queryDoAdmin() {
 		return null;
 	}
 

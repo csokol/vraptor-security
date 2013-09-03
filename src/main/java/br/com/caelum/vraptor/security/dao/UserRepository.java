@@ -6,4 +6,6 @@ public interface UserRepository {
 
 	MeuUser find(String login);
 
+	MeuUser queryDoAdmin();
+
 }
