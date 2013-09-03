@@ -12,8 +12,12 @@ import sun.util.logging.resources.logging;
 
 public class MeuUser implements UserDetails {
 
-	public static final MeuUser USER = new MeuUser("user", "2aa16f2cc99ee441d187d016fe70ff0bf9048f24", "ROLE_USER"); //senha: user
-	public static final MeuUser ADMIN = new MeuUser("admin", "ba90d876f6f1de0245a80bc42fc12b14cc27dc2b", "ROLE_USER", "ROLE_ADMIN"); //senha: admin
+	public static final MeuUser USER = new MeuUser("user", "2aa16f2cc99ee441d187d016fe70ff0bf9048f24", 
+			"ROLE_USER"); //senha: user
+	public static final MeuUser ADMIN = new MeuUser("admin", "ba90d876f6f1de0245a80bc42fc12b14cc27dc2b", 
+			"ROLE_USER", "ROLE_ADMIN"); //senha: admin
+	public static final MeuUser FINANCEIRO = new MeuUser("financeiro", "ba90d876f6f1de0245a80bc42fc12b14cc27dc2b", 
+			"ROLE_USER", "ROLE_FINANCEIRO"); //senha: admin
 
 	private String nome;
 	private String password;
@@ -28,6 +32,7 @@ public class MeuUser implements UserDetails {
 		}
 	}
 
+	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return this.authorities;
 	}

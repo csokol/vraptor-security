@@ -15,6 +15,9 @@ public class UserDao implements UserRepository {
 		if ("admin".equals(login)) {
 			return MeuUser.ADMIN;
 		}
+		if ("financeiro".equals(login)) {
+			return MeuUser.FINANCEIRO;
+		}
 		if ("user".equals(login)) {
 			return MeuUser.USER;
 		}

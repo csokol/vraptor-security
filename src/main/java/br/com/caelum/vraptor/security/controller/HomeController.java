@@ -2,6 +2,7 @@ package br.com.caelum.vraptor.security.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -26,7 +27,7 @@ public class HomeController {
 	@Get("/security/")
 	public void index() {
 		UserDetails principal = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		result.use(Results.http()).body("welcome " + principal.getUsername());
+		result.include("user", principal);
 	}
 	
 	@Get("/security/queryDoAdmin")
@@ -39,6 +40,12 @@ public class HomeController {
 	@Get("/security/admin")
 	public void admin() {
 		result.use(Results.http()).body("top secret admin stuff");
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_FINANCEIRO')")
+	@Get("/security/financeiroOuAdmin")
+	public void financeiroOuAdmin() {
+		result.use(Results.http()).body("vc só pode ser do financeiro ou admin!");
 	}
 
 }
